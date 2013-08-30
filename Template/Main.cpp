@@ -2,15 +2,21 @@
 #include "sb6.h"
 #include "math.h"
 
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+using namespace std;
+
 // Derive Test from sb6::application
-class Test : public sb6::application {
+class Kapitel4 : public sb6::application {
 private:
 	GLuint renderingProgram;
 	GLuint vertexArrayObject;
 
 public:
 	void init() {
-		static const char title[] = "OpenGL Tessalation";
+		static const char title[] = "OpenGL Math";
 		sb6::application::init();
         memcpy(info.title, title, sizeof(title));
 	}
@@ -34,6 +40,16 @@ public:
 
 		// Draw one triangle
 		glDrawArrays(GL_PATCHES, 0, 3);
+	}
+
+	string loadShaderSource(const std::string filePath) {
+		ifstream in("file.txt");
+		stringstream buffer;
+		buffer << in.rdbuf();
+		string contents(buffer.str());
+		in.close();
+		
+		return "hallo";
 	}
 
 	GLuint compileShaders(void) {
@@ -164,6 +180,11 @@ public:
 	}
 
 	void startup() {
+		string str = loadShaderSource("file.txt");
+
+		cout << "read[" << str << "]";
+
+		return;
 		renderingProgram = compileShaders();
 		glGenVertexArrays(1, &vertexArrayObject);
 		glBindVertexArray(vertexArrayObject);
@@ -181,4 +202,4 @@ public:
 };
 
 // Our on and only instance of DECLARE_MAIN
-DECLARE_MAIN(Test);
+DECLARE_MAIN(Kapitel4);

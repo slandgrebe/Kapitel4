@@ -14,7 +14,7 @@
     <ProjectGuid>{A8C75BB5-F8F5-4F95-97F6-85C17F09357C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Template</RootNamespace>
-    <ProjectName>Kapitel3</ProjectName>
+    <ProjectName>Kapitel4</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="file.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

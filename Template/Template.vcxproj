@@ -82,6 +82,11 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <None Include="file.txt" />
+    <None Include="fragment.fs.glsl" />
+    <None Include="geometry.gs.glsl" />
+    <None Include="tessallationControl.tcs.glsl" />
+    <None Include="tessellationEvaluation.tes.glsl" />
+    <None Include="vertex.vs.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

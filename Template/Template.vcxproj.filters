@@ -24,5 +24,20 @@
     <None Include="file.txt">
       <Filter>Quelldateien</Filter>
     </None>
+    <None Include="vertex.vs.glsl">
+      <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="tessallationControl.tcs.glsl">
+      <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="tessellationEvaluation.tes.glsl">
+      <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="geometry.gs.glsl">
+      <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="fragment.fs.glsl">
+      <Filter>Ressourcendateien</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 // Include the "sb6.h" header file
 #include "sb6.h"
 #include "math.h"
+#include "shader.h"
 
 #include <string>
 #include <iostream>
@@ -39,20 +40,39 @@ public:
 		glVertexAttrib4fv(1, triangleColor);
 
 		// Draw one triangle
-		glDrawArrays(GL_PATCHES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 
-	string loadShaderSource(const std::string filePath) {
+	GLchar const * loadShaderSource(const string filePath) {
 		ifstream in("file.txt");
 		stringstream buffer;
 		buffer << in.rdbuf();
-		string contents(buffer.str());
-		in.close();
-		
-		return "hallo";
+		string source = buffer.str();
+
+		cout << "hallo";
+		cout << source << endl << endl;
+		system("pause");
+
+		return source.c_str();
 	}
 
 	GLuint compileShaders(void) {
+
+		/*if (renderingProgram)
+			glDeleteProgram(renderingProgram);
+
+		GLuint shaders[5];
+
+		shaders[0] = sb6::shader::load("vertex.vs.glsl", GL_VERTEX_SHADER);
+		shaders[1] = sb6::shader::load("tessallationControl.tcs.glsl", GL_TESS_CONTROL_SHADER);
+		shaders[2] = sb6::shader::load("tessellationEvaluation.tes.glsl", GL_TESS_EVALUATION_SHADER);
+		shaders[3] = sb6::shader::load("geometry.gs.glsl", GL_GEOMETRY_SHADER);
+		shaders[4] = sb6::shader::load("fragment.fs.glsl", GL_FRAGMENT_SHADER);
+
+		GLuint program = sb6::program::link_from_shaders(shaders, 5, true);
+		
+		return program;*/
+
 		GLuint vertexShader;
 		GLuint tcShader;
 		GLuint teShader;
@@ -74,6 +94,7 @@ public:
 			"	gl_Position = vertices[gl_VertexID]; \n"
 			"} \n"
 		};
+		//static const GLchar* vertexShaderSource[] = { loadShaderSource("vertex.shader") };
 
 		// Source code for the tessallation control shader
 		static const GLchar* tcsSource[] = {
@@ -163,8 +184,8 @@ public:
 		// Create program, attach shader to it, and link it
 		program = glCreateProgram();
 		glAttachShader(program, vertexShader);
-		glAttachShader(program, tcShader);
-		glAttachShader(program, teShader);
+		//glAttachShader(program, tcShader);
+		//glAttachShader(program, teShader);
 		//glAttachShader(program, geometryShader);
 		glAttachShader(program, fragmentShader);
 		glLinkProgram(program);
@@ -175,23 +196,18 @@ public:
 		glDeleteShader(teShader);
 		glDeleteShader(geometryShader);
 		glDeleteShader(fragmentShader);
-
+		
 		return program;
 	}
 
 	void startup() {
-		string str = loadShaderSource("file.txt");
-
-		cout << "read[" << str << "]";
-
-		return;
 		renderingProgram = compileShaders();
 		glGenVertexArrays(1, &vertexArrayObject);
 		glBindVertexArray(vertexArrayObject);
 
 		// Only draw the outlines of the triangles, to see the result of the tessallation
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glPointSize(5.0f);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLES);
+		//glPointSize(5.0f);
 	}
 	
 	void shutdown() {
